@@ -7,7 +7,7 @@
 
     <h1>اهلا بالعسولة </h1>
     <input type="number" id="monNombre" placeholder="Tape un chiffre">
-    <button onclick="envoyerAuBackend()">انزلي يا عسل</button>
+    <button onclick="envoyerAuBackend()">Calculer le carré</button>
 
     <h2 id="affichage">😘😘😘😘</h2>
 
@@ -16,7 +16,7 @@
     const num = document.getElementById('monNombre').value;
     const affichage = document.getElementById('affichage');
     
-    affichage.innerText = "لحضة بىك يابنوتة 😘😘😘.";
+    affichage.innerText = "Connexion au serveur en cours... (Patientez 1 min)";
 
     try {
         const reponse = await fetch('https://first-app-znts.onrender.com/calculer', {
