@@ -1,1 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mon Test Fullstack</title>
+</head>
+<body style="text-align: center; font-family: sans-serif; padding-top: 50px;">
 
+    <h1>Calculateur Magique</h1>
+    <input type="number" id="monNombre" placeholder="Tape un chiffre">
+    <button onclick="envoyerAuBackend()">Calculer le carré</button>
+
+    <h2 id="affichage">Le résultat s'affichera ici</h2>
+
+    <script>
+        async function envoyerAuBackend() {
+    const num = document.getElementById('monNombre').value;
+    const affichage = document.getElementById('affichage');
+    
+    affichage.innerText = "Connexion au serveur en cours... (Patientez 1 min)";
+
+    try {
+        const reponse = await fetch('https://first-app-znts.onrender.com/calculer', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ nombre: parseInt(num) })
+        });
+
+        if (!reponse.ok) {
+            throw new Error("Le serveur a répondu avec une erreur");
+        }
+
+        const donnees = await reponse.json();
+        affichage.innerText = "Succès ! Le carré est : " + donnees.resultat;
+        
+    } catch (erreur) {
+        console.error("Erreur détaillée :", erreur);
+        affichage.innerText = "Erreur : " + erreur.message + ". Vérifie la console (F12).";
+    }
+}
+    </script>
+</body>
+</html>
